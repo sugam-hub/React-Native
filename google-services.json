@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "639862922957",
+    "project_id": "swasta-auth",
+    "storage_bucket": "swasta-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639862922957:android:95a62d9047723903501384",
+        "android_client_info": {
+          "package_name": "com.swasta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639862922957-a2gma2vtjn5ptfa1068dpnauvc824qs0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwR3gCc3nYMsjfWDCHbSiSKJTXpKhMZlE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639862922957-a2gma2vtjn5ptfa1068dpnauvc824qs0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
