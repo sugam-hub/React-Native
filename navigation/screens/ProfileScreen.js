@@ -12,88 +12,88 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 
 const ProfileScreen = ({ navigation }) => {
-  // const [data, setData] = React.useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   phone: "",
-  //   email: "",
-  //   country: "",
-  //   city: "",
-  //   check_textInputChange: false,
-  // });
+  const [data, setData] = React.useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    country: "",
+    city: "",
+    check_textInputChange: false,
+  });
 
-  // const firstNameChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     firstName: val,
-  //   });
-  // };
-
-  // const lastNameChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     lastName: val,
-  //   });
-  // };
-
-  // const phoneChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     phone: val,
-  //   });
-  // };
-
-  // const emailChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     email: val,
-  //   });
-  // };
-
-  // const countryChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     country: val,
-  //   });
-  // };
-
-  // const cityChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     city: val,
-  //   });
-  // };
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
-
-  handleFirstName = (text) => {
-    setFirstName(text);
+  const firstNameChange = (val) => {
+    setData({
+      ...data,
+      firstName: val,
+    });
   };
 
-  handleLastName = (text) => {
-    setLastName(text);
+  const lastNameChange = (val) => {
+    setData({
+      ...data,
+      lastName: val,
+    });
   };
 
-  handlEmail = (text) => {
-    setEmail(text);
+  const phoneChange = (val) => {
+    setData({
+      ...data,
+      phone: val,
+    });
   };
 
-  handlePhone = (text) => {
-    setPhone(text);
+  const emailChange = (val) => {
+    setData({
+      ...data,
+      email: val,
+    });
   };
 
-  handleCountry = (text) => {
-    setCountry(text);
+  const countryChange = (val) => {
+    setData({
+      ...data,
+      country: val,
+    });
   };
 
-  handleCity = (text) => {
-    setCity(text);
+  const cityChange = (val) => {
+    setData({
+      ...data,
+      city: val,
+    });
   };
+
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [country, setCountry] = useState("");
+  // const [city, setCity] = useState("");
+
+  // handleFirstName = (text) => {
+  //   setFirstName(text);
+  // };
+
+  // handleLastName = (text) => {
+  //   setLastName(text);
+  // };
+
+  // handlEmail = (text) => {
+  //   setEmail(text);
+  // };
+
+  // handlePhone = (text) => {
+  //   setPhone(text);
+  // };
+
+  // handleCountry = (text) => {
+  //   setCountry(text);
+  // };
+
+  // handleCity = (text) => {
+  //   setCity(text);
+  // };
   const insertData = () => {
     var firstName = firstName;
     var lastName = lastName;
@@ -197,7 +197,7 @@ const ProfileScreen = ({ navigation }) => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={styles.textInput}
-            onChangeText={handleFirstName}
+            onChangeText={(val) => firstNameChange(val)}
           ></TextInput>
         </View>
         <View style={styles.action}>
@@ -207,7 +207,7 @@ const ProfileScreen = ({ navigation }) => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={styles.textInput}
-            onChangeText={handleLastName}
+            onChangeText={(val) => lastNameChange(val)}
           ></TextInput>
         </View>
         <View style={styles.action}>
@@ -218,7 +218,8 @@ const ProfileScreen = ({ navigation }) => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={styles.textInput}
-            onChangeText={handlePhone}
+            // onChangeText={handlePhone}
+            onChangeText={(val) => phoneChange(val)}
           ></TextInput>
         </View>
         <View style={styles.action}>
@@ -229,8 +230,8 @@ const ProfileScreen = ({ navigation }) => {
             keyboardType="email-address"
             autoCorrect={false}
             style={styles.textInput}
-            // onChangeText={(val) => emailChange(val)}
-            onChangeText={handleEmail}
+            onChangeText={(val) => emailChange(val)}
+            // onChangeText={handleEmail}
           ></TextInput>
         </View>
         <View style={styles.action}>
@@ -240,8 +241,8 @@ const ProfileScreen = ({ navigation }) => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={styles.textInput}
-            // onChangeText={(val) => countryChange(val)}
-            onChangeText={handleCountry}
+            onChangeText={(val) => countryChange(val)}
+            // onChangeText={handleCountry}
           ></TextInput>
         </View>
         <View style={styles.action}>
@@ -251,8 +252,8 @@ const ProfileScreen = ({ navigation }) => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={styles.textInput}
-            // onChangeText={(val) => cityChange(val)}
-            onChangeText={handleCity}
+            onChangeText={(val) => cityChange(val)}
+            // onChangeText={handleCity}
           ></TextInput>
         </View>
         <TouchableOpacity style={styles.commandButton} onPress={insertData()}>

@@ -30,7 +30,7 @@ const SplashScreen = ({ navigation }) => {
         <View style={styles.button}>
           <TouchableOpacity
             style={styles.commandButton}
-            onPress={() => navigation.navigate("SignIn")}
+            onPress={(navigate) => navigation.navigate("SignIn")}
           >
             <Text style={styles.textSign}>Get Started</Text>
             <MaterialIcons name="navigate-next" color="#fff" size={20} />

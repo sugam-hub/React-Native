@@ -1,21 +1,16 @@
-import React from "react";
+import * as React from "react";
 import {
   Text,
   StyleSheet,
   View,
   TouchableOpacity,
-  Dimensions,
   TextInput,
   StatusBar,
-  Pressable,
-  Button,
+  useState,
 } from "react-native";
-// import { useState, useEffect } from "react";
 import * as Animateable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
-
-// import { AuthContext } from "../components/context";
 
 const SignInScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
@@ -25,27 +20,21 @@ const SignInScreen = ({ navigation }) => {
     secureTextEntry: true,
   });
 
-  // console.log(data.email);
+  // const emailHandler = (text) => {
+  //   setEmail(text);
+  // };
 
-  const emailHandler = (text) => {
-    setEmail(text);
-  };
+  // const onSignInPressed = () => {};
 
-  const onSignInPressed = () => {
-    
-  };
+  // const onForgotPasswordPressed = () => {};
 
-  const onForgotPasswordPressed = () => {
-    
-  };
+  // const onSignInFacebook = () => {
+  //   console.warn("Facebook");
+  // };
 
-  const onSignInFacebook = () => {
-    console.warn("Facebook");
-  };
-
-  const onSignInGoogle = () => {
-    console.warn("Google");
-  };
+  // const onSignInGoogle = () => {
+  //   console.warn("Google");
+  // };
 
   const textInputChange = (val) => {
     if (val.length !== 0) {
@@ -120,12 +109,7 @@ const SignInScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
-          <TouchableOpacity
-            style={styles.commandButton}
-            onPress={() => {
-              onSignInPressed();
-            }}
-          >
+          <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
             <Text
               style={[
                 styles.textSign,
@@ -263,9 +247,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingTop: 10,
     opacity: 0.5,
-    // alignContent: "center",
-    // alignItems: "center",
-    // justifyContent: "center",
     color: "#4775d1",
   },
   commandButtonFacebook: {
