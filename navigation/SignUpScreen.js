@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Text,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
   TextInput,
+  ScrollView,
   StatusBar,
 } from "react-native";
 import { createStackNavigator, Stack } from "@react-navigation/stack";
@@ -14,6 +15,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import * as Animateable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
+import { AuthContext } from "../components/context";
 // import { auth } from "../firebase";
 // import axios from "axios";
 
@@ -27,28 +29,28 @@ const SignUpScreen = ({ navigation }) => {
     confirm_secureTextEntry: true,
   });
 
-  const textInputChange = (val) => {
-    if (val.length !== 0) {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: true,
-      });
-    } else {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: false,
-      });
-    }
-  };
+  // const textInputChange = (val) => {
+  //   if (val.length !== 0) {
+  //     setData({
+  //       ...data,
+  //       email: val,
+  //       check_textInputChange: true,
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       email: val,
+  //       check_textInputChange: false,
+  //     });
+  //   }
+  // };
 
-  const handlePasswordChange = (val) => {
-    setData({
-      ...data,
-      password: val,
-    });
-  };
+  // const handlePasswordChange = (val) => {
+  //   setData({
+  //     ...data,
+  //     password: val,
+  //   });
+  // };
 
   // const handleConfirmPasswordChange = (val) => {
   //   setData({
@@ -63,13 +65,13 @@ const SignUpScreen = ({ navigation }) => {
     });
   };
 
-  // const updateConfirmSecureTextEntry = () => {
-  //   setData({
-  //     ...data,
-  //     confirm_secureTextEntry: !data.confirm_secureTextEntry,
-  //   });
-  // };
-  console.log(data.email);
+  const updateConfirmSecureTextEntry = () => {
+    setData({
+      ...data,
+      confirm_secureTextEntry: !data.confirm_secureTextEntry,
+    });
+  };
+  // console.log(data.email);
 
   // const handleSignUp = () => {
   //   auth
@@ -81,16 +83,23 @@ const SignUpScreen = ({ navigation }) => {
   //     .catch((error) => alert(error.message));
   // };
 
-  var InsertRecord = () => {
-    var Email = data.email;
-    var Password = data.password;
+  // var InsertRecord = () => {
+  //   var Email = data.email;
+  //   var Password = data.password;
 
-    if (Email.length == 0 || Password == 0) {
-      alert("Required field is missing");
-    } else {
-      var InsertAPIURL = "http://10.0.2.2:80/api/insert.php/";
-    }
-  };
+  //   if (Email.length == 0 || Password == 0) {
+  //     alert("Required field is missing");
+  //   } else {
+  //     var InsertAPIURL = "http://10.0.2.2:80/api/insert.php/";
+  //   }
+  // };
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [name, setname] = React.useState("");
+
+  const { register } = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -98,92 +107,123 @@ const SignUpScreen = ({ navigation }) => {
       <View style={styles.header}>
         <Text style={styles.text_header}>Register Now!</Text>
       </View>
+
+      {/* Name */}
+
       <Animateable.View animation="fadeInUpBig" style={styles.footer}>
-        <Text style={styles.text_footer}>Email</Text>
-        <View style={styles.action}>
-          <FontAwesome name="user-o" color="05375a" size={20} />
-          <TextInput
-            placeholder="Email"
-            style={styles.textInput}
-            autoCapitalize="none"
-            onChangeText={(val) => textInputChange(val)}
-          />
-          {data.check_textInputChange ? (
-            <Animateable.View animation="bounceIn">
-              <Feather name="check-circle" color="green" size={20} />
-            </Animateable.View>
-          ) : null}
-        </View>
-        <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
+        <ScrollView>
+          <Text style={[styles.text_footer, { marginTop: 5 }]}>Username</Text>
+          <View style={styles.action}>
+            <TextInput
+              placeholder="Username"
+              style={styles.textInput}
+              autoCapitalize="none"
+              value={name}
+              onChangeText={(val) => setname(val)}
+            />
+          </View>
 
-        <View style={styles.action}>
-          <FontAwesome name="lock" color="05375a" size={20} />
-          <TextInput
-            secureTextEntry={data.secureTextEntry ? true : false}
-            placeholder="Password"
-            style={styles.textInput}
-            autoCapitalize="none"
-            onChangeText={(val) => handlePasswordChange(val)}
-          />
-          <TouchableOpacity onPress={updateSecureTextEntry}>
-            {data.secureTextEntry ? (
-              <Feather name="eye-off" color="grey" size={20} />
-            ) : (
-              <Feather name="eye" color="grey" size={20} />
-            )}
-          </TouchableOpacity>
-        </View>
-        {/* <Text style={[styles.text_footer, { marginTop: 35 }]}>
-          Confirm Password
-        </Text>
+          {/* Email */}
+          <Text style={[styles.text_footer, { marginTop: 10 }]}>Email</Text>
+          <View style={styles.action}>
+            <FontAwesome name="user-o" color="05375a" size={20} />
+            <TextInput
+              placeholder="Email"
+              style={styles.textInput}
+              value={email}
+              autoCapitalize="none"
+              onChangeText={(val) => setEmail(val)}
+            />
+            {data.check_textInputChange ? (
+              <Animateable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animateable.View>
+            ) : null}
+          </View>
 
-        <View style={styles.action}>
-          <FontAwesome name="lock" color="05375a" size={20} />
-          <TextInput
-            secureTextEntry={data.confirm_secureTextEntry ? true : false}
-            placeholder="Confirm Password"
-            style={styles.textInput}
-            autoCapitalize="none"
-            onChangeText={(val) => handleConfirmPasswordChange(val)}
-          />
-          <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
-            {data.confirm_secureTextEntry ? (
-              <Feather name="eye-off" color="grey" size={20} />
-            ) : (
-              <Feather name="eye" color="grey" size={20} />
-            )}
-          </TouchableOpacity>
-        </View> */}
-        <View style={styles.button}>
-          <TouchableOpacity style={styles.commandButton} onPress={InsertRecord}>
-            <Text
-              style={[
-                styles.textSign,
-                { fontSize: 18 },
-                { fontWeight: "bold" },
-              ]}
+          {/* Password */}
+
+          <Text style={[styles.text_footer, { marginTop: 10 }]}>Password</Text>
+
+          <View style={styles.action}>
+            <FontAwesome name="lock" color="05375a" size={20} />
+            <TextInput
+              secureTextEntry={data.secureTextEntry ? true : false}
+              placeholder="Password"
+              style={styles.textInput}
+              autoCapitalize="none"
+              value={password}
+              onChangeText={(val) => setPassword(val)}
+            />
+            <TouchableOpacity onPress={updateSecureTextEntry}>
+              {data.secureTextEntry ? (
+                <Feather name="eye-off" color="grey" size={20} />
+              ) : (
+                <Feather name="eye" color="grey" size={20} />
+              )}
+            </TouchableOpacity>
+          </View>
+
+          <Text style={[styles.text_footer, { marginTop: 10 }]}>
+            Confirm Password
+          </Text>
+
+          <View style={styles.action}>
+            <FontAwesome name="lock" color="05375a" size={20} />
+            <TextInput
+              secureTextEntry={data.confirm_secureTextEntry ? true : false}
+              placeholder="Confirm Password"
+              style={styles.textInput}
+              autoCapitalize="none"
+              value={confirmPassword}
+              onChangeText={(val) => setConfirmPassword(val)}
+            />
+            <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
+              {data.confirm_secureTextEntry ? (
+                <Feather name="eye-off" color="grey" size={20} />
+              ) : (
+                <Feather name="eye" color="grey" size={20} />
+              )}
+            </TouchableOpacity>
+          </View>
+          <View style={styles.button}>
+            <TouchableOpacity
+              style={styles.commandButton}
+              id="submitButton"
+              onPress={() => {
+                console.log("SUgam");
+                register(name, email, password, confirmPassword);
+              }}
             >
-              Sign Up
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.button}>
-          <TouchableOpacity
-            style={styles.commandButton1}
-            onPress={() => navigation.navigate("SignIn")}
-          >
-            <Text
-              style={[
-                styles.textSign,
-                { fontSize: 18 },
-                { fontWeight: "bold" },
-                { color: "#009387" },
-              ]}
+              <Text
+                style={[
+                  styles.textSign,
+                  { fontSize: 18 },
+                  { fontWeight: "bold" },
+                ]}
+              >
+                Sign Up
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.button}>
+            <TouchableOpacity
+              style={styles.commandButton1}
+              onPress={() => navigation.navigate("SignIn")}
             >
-              Sign In
-            </Text>
-          </TouchableOpacity>
-        </View>
+              <Text
+                style={[
+                  styles.textSign,
+                  { fontSize: 18 },
+                  { fontWeight: "bold" },
+                  { color: "#009387" },
+                ]}
+              >
+                Sign In
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </Animateable.View>
     </View>
   );

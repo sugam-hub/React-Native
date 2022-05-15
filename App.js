@@ -11,12 +11,14 @@ import RootStackScreen from "./navigation/RootStackScreen";
 import HomeScreen from "./navigation/screens/HomeScreen";
 
 import Inputs from "./navigation/screens/BMIScreen";
+import { AuthProvider } from "./components/context";
 
 const App = () => {
   return (
-    // <RootStackScreen />
-
-    <MainContainer />
+    <AuthProvider>
+      <RootStackScreen />
+    </AuthProvider>
+    // <MainContainer />
     // <Inputs />
   );
 };

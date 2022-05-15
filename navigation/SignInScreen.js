@@ -66,6 +66,8 @@ const SignInScreen = ({ navigation }) => {
     });
   };
 
+  // const [email, setEmail] = Reac
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
@@ -109,7 +111,12 @@ const SignInScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
-          <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
+          <TouchableOpacity
+            style={styles.commandButton}
+            onPress={() => {
+              register(name, email, password, confirmPassword);
+            }}
+          >
             <Text
               style={[
                 styles.textSign,
