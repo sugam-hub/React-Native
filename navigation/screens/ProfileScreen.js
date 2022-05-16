@@ -10,6 +10,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
+import { AuthContext } from "../../components/context";
 
 const ProfileScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
@@ -22,54 +23,41 @@ const ProfileScreen = ({ navigation }) => {
     check_textInputChange: false,
   });
 
-  const firstNameChange = (val) => {
-    setData({
-      ...data,
-      firstName: val,
-    });
-  };
+  // const firstNameChange = (val) => {
+  //   setData({
+  //     ...data,
+  //     firstName: val,
+  //   });
+  // };
 
-  const lastNameChange = (val) => {
-    setData({
-      ...data,
-      lastName: val,
-    });
-  };
+  // const lastNameChange = (val) => {
+  //   setData({
+  //     ...data,
+  //     lastName: val,
+  //   });
+  // };
 
-  const phoneChange = (val) => {
-    setData({
-      ...data,
-      phone: val,
-    });
-  };
+  // const phoneChange = (val) => {
+  //   setData({
+  //     ...data,
+  //     phone: val,
+  //   });
+  // };
 
-  const emailChange = (val) => {
-    setData({
-      ...data,
-      email: val,
-    });
-  };
+  // const emailChange = (val) => {
+  //   setData({
+  //     ...data,
+  //     email: val,
+  //   });
+  // };
 
-  const countryChange = (val) => {
-    setData({
-      ...data,
-      country: val,
-    });
-  };
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [country, setCountry] = React.useState("");
+  const [city, setCity] = React.useState("");
 
-  const cityChange = (val) => {
-    setData({
-      ...data,
-      city: val,
-    });
-  };
-
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [phone, setPhone] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [country, setCountry] = useState("");
-  // const [city, setCity] = useState("");
+  const { profile } = React.useContext(AuthContext);
 
   // handleFirstName = (text) => {
   //   setFirstName(text);
@@ -94,51 +82,7 @@ const ProfileScreen = ({ navigation }) => {
   // handleCity = (text) => {
   //   setCity(text);
   // };
-  const insertData = () => {
-    var firstName = firstName;
-    var lastName = lastName;
-    var phone = phone;
-    var email = email;
-    var country = country;
-    var city = city;
-    if (
-      firstName == 0 ||
-      lastName == 0 ||
-      phone == 0 ||
-      email == 0 ||
-      country == 0 ||
-      city == 0
-    ) {
-      alert("Required field is missing");
-    } else {
-      var InsertAPIURL = "http://10.0.2.2:80/api/record.php";
 
-      var headers = {
-        Accept: "application.json",
-        "Content-Type": "application/json",
-      };
-
-      var Data = {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        phone: data.phone,
-        email: data.email,
-        country: data.country,
-        city: data.city,
-      };
-      fetch(InsertAPIURL, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(Data),
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          // alert(response[0].Message);
-        });
-    }
-  };
-
-  console.log(data.firstName);
   return (
     <View style={styles.container}>
       <View style={{ margin: 20 }}>
@@ -197,7 +141,8 @@ const ProfileScreen = ({ navigation }) => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={styles.textInput}
-            onChangeText={(val) => firstNameChange(val)}
+            value={firstName}
+            onChangeText={(val) => setFirstName(val)}
           ></TextInput>
         </View>
         <View style={styles.action}>
@@ -207,7 +152,8 @@ const ProfileScreen = ({ navigation }) => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={styles.textInput}
-            onChangeText={(val) => lastNameChange(val)}
+            value={lastName}
+            onChangeText={(val) => setLastName(val)}
           ></TextInput>
         </View>
         <View style={styles.action}>
@@ -219,10 +165,11 @@ const ProfileScreen = ({ navigation }) => {
             autoCorrect={false}
             style={styles.textInput}
             // onChangeText={handlePhone}
-            onChangeText={(val) => phoneChange(val)}
+            value={phone}
+            onChangeText={(val) => setPhone(val)}
           ></TextInput>
         </View>
-        <View style={styles.action}>
+        {/* <View style={styles.action}>
           <FontAwesome name="envelope-o" size={20} />
           <TextInput
             placeholder="Email"
@@ -233,7 +180,7 @@ const ProfileScreen = ({ navigation }) => {
             onChangeText={(val) => emailChange(val)}
             // onChangeText={handleEmail}
           ></TextInput>
-        </View>
+        </View> */}
         <View style={styles.action}>
           <FontAwesome name="globe" size={20} />
           <TextInput
@@ -241,7 +188,8 @@ const ProfileScreen = ({ navigation }) => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={styles.textInput}
-            onChangeText={(val) => countryChange(val)}
+            value={country}
+            onChangeText={(val) => setCountry(val)}
             // onChangeText={handleCountry}
           ></TextInput>
         </View>
@@ -252,11 +200,17 @@ const ProfileScreen = ({ navigation }) => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={styles.textInput}
-            onChangeText={(val) => cityChange(val)}
+            value={city}
+            onChangeText={(val) => setCity(val)}
             // onChangeText={handleCity}
           ></TextInput>
         </View>
-        <TouchableOpacity style={styles.commandButton} onPress={insertData()}>
+        <TouchableOpacity
+          style={styles.commandButton}
+          onPress={() => {
+            profile(firstName, lastName, phone, country, city);
+          }}
+        >
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
       </View>

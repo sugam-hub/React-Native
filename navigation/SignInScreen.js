@@ -11,6 +11,7 @@ import {
 import * as Animateable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
+import { AuthContext } from "../components/context";
 
 const SignInScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
@@ -36,28 +37,28 @@ const SignInScreen = ({ navigation }) => {
   //   console.warn("Google");
   // };
 
-  const textInputChange = (val) => {
-    if (val.length !== 0) {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: true,
-      });
-    } else {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: false,
-      });
-    }
-  };
+  // const textInputChange = (val) => {
+  //   if (val.length !== 0) {
+  //     setData({
+  //       ...data,
+  //       email: val,
+  //       check_textInputChange: true,
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       email: val,
+  //       check_textInputChange: false,
+  //     });
+  //   }
+  // };
 
-  const handlePasswordChange = (val) => {
-    setData({
-      ...data,
-      password: val,
-    });
-  };
+  // const handlePasswordChange = (val) => {
+  //   setData({
+  //     ...data,
+  //     password: val,
+  //   });
+  // };
 
   const updateSecureTextEntry = () => {
     setData({
@@ -66,7 +67,10 @@ const SignInScreen = ({ navigation }) => {
     });
   };
 
-  // const [email, setEmail] = Reac
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const { login } = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -75,16 +79,17 @@ const SignInScreen = ({ navigation }) => {
         <Text style={styles.text_header}>Welcome!</Text>
       </View>
       <Animateable.View animation="fadeInUpBig" style={styles.footer}>
-        <Text style={styles.text_footer}>Email</Text>
+        <Text style={styles.text_footer}>Username</Text>
         <View style={styles.action}>
           <FontAwesome name="user-o" color="05375a" size={20} />
           <TextInput
-            placeholder="Your Email"
+            placeholder="Your Username"
             style={styles.textInput}
             // value={username}
             // setValue={setUsername}
             autoCapitalize="none"
-            onChangeText={(val) => textInputChange(val)}
+            value={username}
+            onChangeText={(val) => setUsername(val)}
           />
           {data.check_textInputChange ? (
             <Animateable.View animation="bounceIn">
@@ -100,7 +105,8 @@ const SignInScreen = ({ navigation }) => {
             placeholder="Your Password"
             style={styles.textInput}
             autoCapitalize="none"
-            onChangeText={(val) => handlePasswordChange(val)}
+            value={password}
+            onChangeText={(val) => setPassword(val)}
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? (
@@ -114,7 +120,7 @@ const SignInScreen = ({ navigation }) => {
           <TouchableOpacity
             style={styles.commandButton}
             onPress={() => {
-              register(name, email, password, confirmPassword);
+              login(username, password);
             }}
           >
             <Text

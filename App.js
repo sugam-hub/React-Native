@@ -16,9 +16,9 @@ import { AuthProvider } from "./components/context";
 const App = () => {
   return (
     <AuthProvider>
-      <RootStackScreen />
+      {/* <RootStackScreen /> */}
+      <MainContainer />
     </AuthProvider>
-    // <MainContainer />
     // <Inputs />
   );
 };

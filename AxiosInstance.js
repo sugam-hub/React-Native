@@ -10,6 +10,7 @@ const AxiosInstance = axios.create({
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
+    // Autorization: "application/json",
     accept: "application/json",
   },
 });
