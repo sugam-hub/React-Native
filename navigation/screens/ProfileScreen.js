@@ -13,15 +13,15 @@ import Feather from "react-native-vector-icons/Feather";
 import { AuthContext } from "../../components/context";
 
 const ProfileScreen = ({ navigation }) => {
-  const [data, setData] = React.useState({
-    firstName: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    country: "",
-    city: "",
-    check_textInputChange: false,
-  });
+  // const [data, setData] = React.useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   phone: "",
+  //   email: "",
+  //   country: "",
+  //   city: "",
+  //   check_textInputChange: false,
+  // });
 
   // const firstNameChange = (val) => {
   //   setData({
@@ -57,7 +57,7 @@ const ProfileScreen = ({ navigation }) => {
   const [country, setCountry] = React.useState("");
   const [city, setCity] = React.useState("");
 
-  const { profile } = React.useContext(AuthContext);
+  // const { profile } = React.useContext(AuthContext);
 
   // handleFirstName = (text) => {
   //   setFirstName(text);
@@ -82,7 +82,7 @@ const ProfileScreen = ({ navigation }) => {
   // handleCity = (text) => {
   //   setCity(text);
   // };
-
+  const { profile } = React.useContext(AuthContext);
   return (
     <View style={styles.container}>
       <View style={{ margin: 20 }}>

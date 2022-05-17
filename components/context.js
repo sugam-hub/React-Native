@@ -1,10 +1,20 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import AxiosInstance from "../AxiosInstance";
 
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [userInfo, setUserInfo] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const [token, setToken] = React.useState("");
+  const getToken = () => {
+    return token;
+  };
+
   const register = (name, email, password, confirmPassword) => {
+    setIsLoading(true);
     var Data = {
       username: name,
       email: email,
@@ -22,22 +32,28 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = (username, password) => {
+    setIsLoading(true);
     let body = {
       username: username.toLowerCase(),
       password: password,
     };
     AxiosInstance.post("auth/login/", body)
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw res.json();
-        }
+        setToken(res.data.key);
+
+        AsyncStorage.setItem("token", res.data.key);
+        setIsLoading(false);
+        // if (res.ok) {
+        //   return res.json();
+        // } else {
+        //   throw res.json();
+        // }
       })
       .then((json) => {
         console.log("Logged In");
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log(error);
       });
   };
@@ -61,9 +77,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const globalContext = {
+    isLoading,
+    userInfo,
+    getToken,
+    token,
+    profile,
     register,
     login,
-    profile,
   };
   return (
     <AuthContext.Provider value={globalContext}>

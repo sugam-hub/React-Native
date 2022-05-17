@@ -16,6 +16,7 @@ import * as Animateable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { AuthContext } from "../components/context";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 // import { auth } from "../firebase";
 // import axios from "axios";
 
@@ -99,12 +100,13 @@ const SignUpScreen = ({ navigation }) => {
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [name, setname] = React.useState("");
 
-  const { register } = React.useContext(AuthContext);
+  const { register, isLoading } = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
       <View style={styles.header}>
+        <Spinner visible={isLoading} />
         <Text style={styles.text_header}>Register Now!</Text>
       </View>
 

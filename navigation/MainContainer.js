@@ -21,9 +21,9 @@ const profileName = "Profile";
 
 const Tab = createMaterialBottomTabNavigator();
 
-const MainContainer = () => {
+const MainContainer = ({ navigation }) => {
   return (
-    <NavigationContainer>
+    <>
       <Tab.Navigator
         initialRouteName={homeName}
         screenOptions={({ route }) => ({
@@ -56,14 +56,18 @@ const MainContainer = () => {
           style: { padding: 10, height: 70 },
         }}
       >
-        <Tab.Screen name={homeName} component={HomeScreen} />
+        <Tab.Screen
+          name={homeName}
+          // navigation={navigation}
+          component={HomeScreen}
+        />
         <Tab.Screen name={foodName} component={FoodScreen} />
         <Tab.Screen name={exerciseName} component={ExerciseScreen} />
         <Tab.Screen name={bmiName} component={Inputs} />
         <Tab.Screen name={calculatorName} component={CalculatorScreen} />
         <Tab.Screen name={profileName} component={ProfileScreen} />
       </Tab.Navigator>
-    </NavigationContainer>
+    </>
   );
 };
 

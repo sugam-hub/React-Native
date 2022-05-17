@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   TextInput,
   StatusBar,
-  useState,
 } from "react-native";
 import * as Animateable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { AuthContext } from "../components/context";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const SignInScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
@@ -70,10 +70,11 @@ const SignInScreen = ({ navigation }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const { login } = React.useContext(AuthContext);
+  const { isLoading, login } = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>
+      <Spinner visible={isLoading} />
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.text_header}>Welcome!</Text>
@@ -121,6 +122,7 @@ const SignInScreen = ({ navigation }) => {
             style={styles.commandButton}
             onPress={() => {
               login(username, password);
+              navigation.navigate("DataView");
             }}
           >
             <Text
