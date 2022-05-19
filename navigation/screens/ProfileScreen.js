@@ -11,70 +11,40 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { AuthContext } from "../../components/context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AxiosInstance from "../../AxiosInstance";
 
 const ProfileScreen = ({ navigation }) => {
-  // const [data, setData] = React.useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   phone: "",
-  //   email: "",
-  //   country: "",
-  //   city: "",
-  //   check_textInputChange: false,
-  // });
-
-  // const firstNameChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     firstName: val,
-  //   });
-  // };
-
-  // const lastNameChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     lastName: val,
-  //   });
-  // };
-
-  // const phoneChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     phone: val,
-  //   });
-  // };
-
-  // const emailChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     email: val,
-  //   });
-  // };
-
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [country, setCountry] = React.useState("");
   const [city, setCity] = React.useState("");
 
-  const [userInfo, setUserInfo] = React.useEffect(() => {
-    AxiosInstance.get(
-      "profile/",
-      {},
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
-      .then((res) => {
-        setUserInfo(res.data);
-        AsyncStorage.setItem("userProfile", JSON.stringify(res.data));
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+  const [userInfo, setUserInfo] = React.useState({});
 
-  const { profile, logout } = React.useContext(AuthContext);
+  React.useEffect(() => {
+    // setIsAuthenticated(token !== null ? true : false);
+    AsyncStorage.getItem("userInfo").then((values) => {
+      setUserInfo(JSON.parse(values));
+      AxiosInstance.get(
+        "profile/",
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+        .then((res) => {
+          setUserInfo(res.data);
+          AsyncStorage.setItem("userProfile", JSON.stringify(res.data));
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    });
+  }, [token]);
+
+  const { profile, logout, token } = React.useContext(AuthContext);
   console.log(userInfo);
   return (
     <View style={styles.container}>
@@ -162,18 +132,6 @@ const ProfileScreen = ({ navigation }) => {
             onChangeText={(val) => setPhone(val)}
           ></TextInput>
         </View>
-        {/* <View style={styles.action}>
-          <FontAwesome name="envelope-o" size={20} />
-          <TextInput
-            placeholder="Email"
-            placeholderTextColor="#666666"
-            keyboardType="email-address"
-            autoCorrect={false}
-            style={styles.textInput}
-            onChangeText={(val) => emailChange(val)}
-            // onChangeText={handleEmail}
-          ></TextInput>
-        </View> */}
         <View style={styles.action}>
           <FontAwesome name="globe" size={20} />
           <TextInput

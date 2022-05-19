@@ -15,10 +15,7 @@ import AxiosInstance from "../../AxiosInstance";
 
 // import foods from "./Foods";
 
-// import { AuthContext } from "../../components/context";
-
 const FoodScreen = ({ navigation }) => {
-  // const { fetchFoods } = React.useContext(AuthContext);
   const [foods, setFoods] = React.useState([]);
   React.useEffect(() => {
     AxiosInstance.get("food/list/")
@@ -29,7 +26,6 @@ const FoodScreen = ({ navigation }) => {
         let error = Object.values(e.response.data)[0][0];
         alert(`Error Fetching Foods`);
       });
-    // foods = foods;
   }, []);
   console.log(foods);
   const oneFood = ({ item }) => (

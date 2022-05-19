@@ -69,9 +69,9 @@ const ExerciseScreen = ({ navigation }) => {
     return <View style={styles.separator} />;
   };
   return (
-    <SafeAreaView>
-      <StatusBar backgroundColor="#009387" barStyle="light-content" />
-      <ScrollView>
+    <ScrollView>
+      <SafeAreaView>
+        <StatusBar backgroundColor="#009387" barStyle="light-content" />
         <View style={styles.listHeader}>
           <Text style={styles.listHeadLine}>Exercise</Text>
         </View>
@@ -91,8 +91,8 @@ const ExerciseScreen = ({ navigation }) => {
           ItemSeparatorComponent={itemSeperator1}
           ListEmptyComponent={<Text>This is an empty list.</Text>}
         />
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 
