@@ -23,7 +23,7 @@ const App = () => {
   // let token = AsyncStorage.getItem("token");
   // console.log(token);
   return (
-    <AuthProvider>~
+    <AuthProvider>
       <MainNavigation />
       {/* {token ? (
         <RootStackScreen />

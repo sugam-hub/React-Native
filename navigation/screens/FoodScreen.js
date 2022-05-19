@@ -11,18 +11,36 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import foods from "./Foods";
+import AxiosInstance from "../../AxiosInstance";
+
+// import foods from "./Foods";
+
+// import { AuthContext } from "../../components/context";
 
 const FoodScreen = ({ navigation }) => {
+  // const { fetchFoods } = React.useContext(AuthContext);
+  const [foods, setFoods] = React.useState([]);
+  React.useEffect(() => {
+    AxiosInstance.get("food/list/")
+      .then((res) => {
+        setFoods(res.data);
+      })
+      .catch((e) => {
+        let error = Object.values(e.response.data)[0][0];
+        alert(`Error Fetching Foods`);
+      });
+    // foods = foods;
+  }, []);
+  console.log(foods);
   const oneFood = ({ item }) => (
     <View style={styles.item}>
       <TouchableOpacity onPress={() => {}}>
-        <Image source={item.image} style={styles.img} />
+        <Image source={item.photo} style={styles.img} />
       </TouchableOpacity>
       <View>
         <TouchableOpacity onPress={() => {}}>
           <Text style={styles.name}>{item.name}</Text>
-          <Text style={styles.name1}>{item.time}</Text>
+          {/* <Text style={styles.name1}>{item.time}</Text> */}
           <Text style={styles.name1}>{item.kcal}</Text>
           {/* <Text style={styles.name2}>{item.foodDescription}</Text> */}
         </TouchableOpacity>

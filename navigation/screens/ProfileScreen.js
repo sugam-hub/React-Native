@@ -57,32 +57,25 @@ const ProfileScreen = ({ navigation }) => {
   const [country, setCountry] = React.useState("");
   const [city, setCity] = React.useState("");
 
-  // const { profile } = React.useContext(AuthContext);
+  const [userInfo, setUserInfo] = React.useEffect(() => {
+    AxiosInstance.get(
+      "profile/",
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((res) => {
+        setUserInfo(res.data);
+        AsyncStorage.setItem("userProfile", JSON.stringify(res.data));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
-  // handleFirstName = (text) => {
-  //   setFirstName(text);
-  // };
-
-  // handleLastName = (text) => {
-  //   setLastName(text);
-  // };
-
-  // handlEmail = (text) => {
-  //   setEmail(text);
-  // };
-
-  // handlePhone = (text) => {
-  //   setPhone(text);
-  // };
-
-  // handleCountry = (text) => {
-  //   setCountry(text);
-  // };
-
-  // handleCity = (text) => {
-  //   setCity(text);
-  // };
-  const { profile } = React.useContext(AuthContext);
+  const { profile, logout } = React.useContext(AuthContext);
+  console.log(userInfo);
   return (
     <View style={styles.container}>
       <View style={{ margin: 20 }}>
@@ -212,6 +205,15 @@ const ProfileScreen = ({ navigation }) => {
           }}
         >
           <Text style={styles.panelButtonTitle}>Submit</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.commandButton}
+          onPress={() => {
+            logout();
+          }}
+        >
+          <Text style={styles.panelButtonTitle}>Logout</Text>
         </TouchableOpacity>
       </View>
     </View>

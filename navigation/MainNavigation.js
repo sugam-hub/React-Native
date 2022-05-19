@@ -13,12 +13,18 @@ import { AuthContext } from "../components/context";
 const Stack = createNativeStackNavigator();
 
 const Navigation = ({ navigation }) => {
-  const { token } = React.useContext(AuthContext);
-  console.log(token);
+  const { isAuthenticated } = React.useContext(AuthContext);
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {token ? (
+        {isAuthenticated ? (
+          <Stack.Screen
+            name="DataView"
+            component={MainContainer}
+            navigation={navigation}
+            options={{ headerShown: false }}
+          />
+        ) : (
           <>
             <Stack.Screen
               name="Splash"
@@ -36,13 +42,6 @@ const Navigation = ({ navigation }) => {
               navigation={navigation}
             />
           </>
-        ) : (
-          <Stack.Screen
-            name="DataView"
-            component={MainContainer}
-            navigation={navigation}
-            options={{ headerShown: false }}
-          />
         )}
       </Stack.Navigator>
     </NavigationContainer>

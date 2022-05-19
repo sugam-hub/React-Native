@@ -15,50 +15,9 @@ import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const SignInScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
-    email: "",
-    password: "",
     check_textInputChange: false,
     secureTextEntry: true,
   });
-
-  // const emailHandler = (text) => {
-  //   setEmail(text);
-  // };
-
-  // const onSignInPressed = () => {};
-
-  // const onForgotPasswordPressed = () => {};
-
-  // const onSignInFacebook = () => {
-  //   console.warn("Facebook");
-  // };
-
-  // const onSignInGoogle = () => {
-  //   console.warn("Google");
-  // };
-
-  // const textInputChange = (val) => {
-  //   if (val.length !== 0) {
-  //     setData({
-  //       ...data,
-  //       email: val,
-  //       check_textInputChange: true,
-  //     });
-  //   } else {
-  //     setData({
-  //       ...data,
-  //       email: val,
-  //       check_textInputChange: false,
-  //     });
-  //   }
-  // };
-
-  // const handlePasswordChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     password: val,
-  //   });
-  // };
 
   const updateSecureTextEntry = () => {
     setData({
@@ -122,7 +81,7 @@ const SignInScreen = ({ navigation }) => {
             style={styles.commandButton}
             onPress={() => {
               login(username, password);
-              navigation.navigate("DataView");
+              // navigation.navigate("Splash");
             }}
           >
             <Text

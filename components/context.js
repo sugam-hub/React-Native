@@ -7,11 +7,21 @@ export const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
+  const [food, setFood] = React.useState([]);
 
-  const [token, setToken] = React.useState("");
-  const getToken = () => {
-    return token;
-  };
+  const [token, setToken] = React.useState(null);
+  AsyncStorage.getItem("token").then((values) => {
+    setToken(values);
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  React.useEffect(() => {
+    setIsAuthenticated(token !== null ? true : false);
+    AsyncStorage.getItem("userInfo").then((values) => {
+      setUserInfo(JSON.parse(values));
+    });
+  }, [token]);
+  console.log(isAuthenticated);
 
   const register = (name, email, password, confirmPassword) => {
     setIsLoading(true);
@@ -42,12 +52,22 @@ export const AuthProvider = ({ children }) => {
         setToken(res.data.key);
 
         AsyncStorage.setItem("token", res.data.key);
+        AxiosInstance.get(
+          "profile/",
+          {},
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+          .then((res) => {
+            setUserInfo(res.data);
+            AsyncStorage.setItem("userProfile", JSON.stringify(res.data));
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+        setIsAuthenticated(true);
         setIsLoading(false);
-        // if (res.ok) {
-        //   return res.json();
-        // } else {
-        //   throw res.json();
-        // }
       })
       .then((json) => {
         console.log("Logged In");
@@ -75,15 +95,54 @@ export const AuthProvider = ({ children }) => {
         alert(`Register Error ${error}`);
       });
   };
+  // const fetchFoods = () => {
+  //   AxiosInstance.get("food/list/")
+  //     .then((res) => {
+  //       setFood(res.data);
+  //     })
+  //     .catch((e) => {
+  //       let error = Object.values(e.response.data)[0][0];
+  //       alert(`Error Fetching Foods`);
+  //     });
+  //   return food;
+  // };
+  const logout = () => {
+    setIsLoading(true);
+    AxiosInstance.post(
+      "auth/logout/",
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((res) => {
+        AsyncStorage.removeItem("token");
+        setToken(null);
+        setIsLoading(false);
+        setIsAuthenticated(false);
+      })
+      .catch((e) => {
+        alert(`Logout Error ${e}`);
+        AsyncStorage.removeItem("token");
+        setToken(null);
+        setIsLoading(false);
+        setIsAuthenticated(false);
+      })
+      .finally(() => {});
+  };
 
   const globalContext = {
     isLoading,
     userInfo,
-    getToken,
+    // getToken,
     token,
+    // fetchFoods,
+    food,
     profile,
     register,
     login,
+    logout,
+    isAuthenticated,
   };
   return (
     <AuthContext.Provider value={globalContext}>
