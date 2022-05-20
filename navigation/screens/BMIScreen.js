@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
+import { AuthContext } from "../../components/context";
 
 // const BMIScreen = ({ navigation }) => {
 class Inputs extends Component {
@@ -15,6 +16,7 @@ class Inputs extends Component {
     bmi: "",
     BmiResult: "",
   };
+
   handleHeight = (text) => {
     this.setState({ height: text });
   };
@@ -40,8 +42,14 @@ class Inputs extends Component {
       alert("Incorrect Input!");
       this.setState({ BmiResult: "" });
     }
+    return result;
   };
+
   render() {
+    let { bmi } = this.context;
+    const setBmi = (data) => {
+      bmi(data);
+    };
     return (
       <View style={styles.container}>
         <View>
@@ -96,7 +104,9 @@ class Inputs extends Component {
 
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => this.calculate(this.state.height, this.state.weight)}
+          onPress={() => {
+            setBmi(this.calculate(this.state.height, this.state.weight));
+          }}
         >
           <Text style={styles.submitButtonText}> Calculate </Text>
         </TouchableOpacity>
@@ -117,6 +127,7 @@ class Inputs extends Component {
   }
 }
 // };
+Inputs.contextType = AuthContext;
 export default Inputs;
 
 const styles = StyleSheet.create({

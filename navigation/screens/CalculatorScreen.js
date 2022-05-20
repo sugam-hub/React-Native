@@ -8,15 +8,12 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { RadioButton } from "react-native-paper";
 
 // const CalculatorScreen = ({ navigation }) => {
 class CalculatorScreen extends Component {
   state = {
     age: "",
-    // weight: "",
     gender: "",
-    // cal: "",
     calResult: "",
   };
   handleAge = (text) => {

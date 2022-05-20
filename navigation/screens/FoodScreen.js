@@ -17,9 +17,11 @@ import AxiosInstance from "../../AxiosInstance";
 
 const FoodScreen = ({ navigation }) => {
   const [foods, setFoods] = React.useState([]);
+  const [allfoods, setAllFoods] = React.useState([]);
   React.useEffect(() => {
     AxiosInstance.get("food/list/")
       .then((res) => {
+        setAllFoods(res.data);
         setFoods(res.data);
       })
       .catch((e) => {
@@ -27,24 +29,53 @@ const FoodScreen = ({ navigation }) => {
         alert(`Error Fetching Foods`);
       });
   }, []);
+  const getRecommendedFoods = (bmiAffectionRate) => {
+    let filteredFoods = allfoods.filter((food) => {
+      return food.bmi_affection_rate == bmiAffectionRate;
+    });
+    console.log(filteredFoods);
+    setFoods(filteredFoods);
+  };
   console.log(foods);
   const oneFood = ({ item }) => (
+    // {foods.map((item) => (
     <View style={styles.item}>
       <TouchableOpacity onPress={() => {}}>
         <Image source={item.photo} style={styles.img} />
       </TouchableOpacity>
+
       <View>
         <TouchableOpacity onPress={() => {}}>
           <Text style={styles.name}>{item.name}</Text>
-          {/* <Text style={styles.name1}>{item.time}</Text> */}
           <Text style={styles.name1}>{item.kcal}</Text>
-          {/* <Text style={styles.name2}>{item.foodDescription}</Text> */}
         </TouchableOpacity>
       </View>
     </View>
+    // });
   );
   const headerComponent = () => {
-    return <Text style={styles.listHeadLine}>Foods</Text>;
+    return (
+      <View style={styles.topNav}>
+        <TouchableOpacity
+          style={styles.commandButton}
+          onPress={() => {
+            // profile(firstName, lastName, phone, country, city);
+            getRecommendedFoods(-1);
+          }}
+        >
+          <Text style={styles.listHeadLine}>Lose Weight</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.commandButton}
+          onPress={() => {
+            // profile(firstName, lastName, phone, country, city);
+            getRecommendedFoods(1);
+          }}
+        >
+          <Text style={styles.listHeadLine}>Gain Weight</Text>
+        </TouchableOpacity>
+      </View>
+    );
   };
   const itemSeperator = () => {
     return <View style={styles.separator} />;
@@ -53,6 +84,7 @@ const FoodScreen = ({ navigation }) => {
     <ScrollView>
       <SafeAreaView>
         <StatusBar backgroundColor="#009387" barStyle="light-content" />
+
         <FlatList
           ListHeaderComponentStyle={styles.listHeader}
           ListHeaderComponent={headerComponent}
@@ -128,4 +160,27 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 13,
   },
+  topNav: {
+    fontWeight: "900",
+    flexDirection: "row",
+    alignContent: "flex-start",
+    paddingHorizontal: 100,
+    paddingVertical: 6,
+    borderRadius: 4,
+    backgroundColor: "oldlace",
+    alignSelf: "flex-start",
+    marginHorizontal: "1%",
+    marginBottom: 6,
+    minWidth: "48%",
+    textAlign: "center",
+    margin: 12,
+  },
+  // listHeadline1: {
+  //   flexDirection: "row",
+  //   // backgroundColor: "oldlace",
+  // },
+  // listHeadLine: {
+  //   flexDirection: "row",
+  //   // backgroundColor: "oldlace",
+  // },
 });

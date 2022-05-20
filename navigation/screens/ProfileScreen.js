@@ -26,21 +26,30 @@ const ProfileScreen = ({ navigation }) => {
   React.useEffect(() => {
     // setIsAuthenticated(token !== null ? true : false);
     AsyncStorage.getItem("userInfo").then((values) => {
-      setUserInfo(JSON.parse(values));
-      AxiosInstance.get(
-        "profile/",
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-        .then((res) => {
-          setUserInfo(res.data);
-          AsyncStorage.setItem("userProfile", JSON.stringify(res.data));
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      let data = JSON.parse(values);
+      setUserInfo(data);
+      setFirstName(data.firstname);
+      setLastName(data.lastname);
+      setPhone(data.phone);
+      setCountry(data.country);
+      setCity(data.city);
+      console.log(userInfo);
+
+      // AxiosInstance.get(
+      //   "profile/",
+      //   {},
+      //   {
+      //     headers: { Authorization: `Bearer ${token}` },
+      //   }
+      // )
+      //   .then((res) => {
+      //     setUserInfo(res.data);
+      //     AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
+      //     // setUserInfo(userInfo);
+      //   })
+      //   .catch((e) => {
+      //     console.log(e);
+      //   });
     });
   }, [token]);
 
@@ -94,7 +103,7 @@ const ProfileScreen = ({ navigation }) => {
               fontWeight: "bold",
             }}
           >
-            Sugam Poudel
+            {userInfo.firstname} {userInfo.lastname}
           </Text>
         </View>
         <View style={styles.action}>

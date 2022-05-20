@@ -1,19 +1,57 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import AxiosInstance from "../../AxiosInstance";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../../components/context";
 
 import Badge from "../components/Badge";
 
-const Headers = (_) => (
-  <React.Fragment>
-    <View style={styles.icons}></View>
-    <View>
-      <Text style={styles.headerText}>Start Your</Text>
+// const Headers = (_) => (
+const Headers = () => {
+  const [userInfo, setUserInfo] = React.useState({});
+  const { token } = React.useContext(AuthContext);
+
+  React.useEffect(() => {
+    // setIsAuthenticated(token !== null ? true : false);
+    AsyncStorage.getItem("userInfo").then((values) => {
+      setUserInfo(JSON.parse(values));
+      // setUserInfo(values.firstname);
+      console.log(userInfo);
+
+      AxiosInstance.get(
+        "profile/",
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+        .then((res) => {
+          setUserInfo(res.data);
+          AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
+          // setUserInfo(userInfo);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    });
+  }, [token]);
+  // <React.Fragment>
+  return (
+    <View style={styles.icons}>
+      <View>
+        {/* <Text style={styles.headerText}>Start Your</Text>
       <Text style={styles.headerText}>
-        <Text style={styles.pinkText}>Fitness</Text> Journey
-      </Text>
+      <Text style={styles.pinkText}>Fitness</Text> Journey
+    </Text> */}
+        <Text>Hello, {userInfo && userInfo.firstname}</Text>
+        <Text>Your BMI: {userInfo && userInfo.bmi}</Text>
+        <Text>Calories to intake: {userInfo && userInfo.calories}</Text>
+      </View>
+      {/* </React.Fragment> */}
     </View>
-  </React.Fragment>
-);
+  );
+};
+// );
 
 const styles = StyleSheet.create({
   icons: {

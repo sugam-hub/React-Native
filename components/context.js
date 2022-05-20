@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
         )
           .then((res) => {
             setUserInfo(res.data);
-            AsyncStorage.setItem("userProfile", JSON.stringify(res.data));
+            AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
           })
           .catch((e) => {
             console.log(e);
@@ -89,6 +89,7 @@ export const AuthProvider = ({ children }) => {
     AxiosInstance.put("profile/", Data)
       .then((res) => {
         alert(`Profile Submitted`);
+        AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
       })
       .catch((e) => {
         let error = Object.values(e.response.data)[0][0];
@@ -106,6 +107,28 @@ export const AuthProvider = ({ children }) => {
   //     });
   //   return food;
   // };
+  const bmi = (bmi) => {
+    AxiosInstance.put("profile/", { bmi })
+      .then((res) => {
+        console.log(res.data);
+        AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
+      })
+      .catch((e) => {
+        let error = Object.values(e.response.data)[0][0];
+        console.log(`BMI Error ${error}`);
+      });
+  };
+  const calories = (calories) => {
+    AxiosInstance.put("profile/", { calories })
+      .then((res) => {
+        console.log(res.data);
+        AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
+      })
+      .catch((e) => {
+        let error = Object.values(e.response.data)[0][0];
+        console.log(`BMI Error ${error}`);
+      });
+  };
   const logout = () => {
     setIsLoading(true);
     AxiosInstance.post(
@@ -134,10 +157,10 @@ export const AuthProvider = ({ children }) => {
   const globalContext = {
     isLoading,
     userInfo,
-    // getToken,
     token,
-    // fetchFoods,
     food,
+    bmi,
+    calories,
     profile,
     register,
     login,
