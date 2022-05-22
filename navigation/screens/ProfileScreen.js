@@ -15,25 +15,26 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import AxiosInstance from "../../AxiosInstance";
 
 const ProfileScreen = ({ navigation }) => {
+  const { profile, logout, token, userInfo } = React.useContext(AuthContext);
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [country, setCountry] = React.useState("");
   const [city, setCity] = React.useState("");
 
-  const [userInfo, setUserInfo] = React.useState({});
+  const [userForm, setUserForm] = React.useState({});
 
   React.useEffect(() => {
     // setIsAuthenticated(token !== null ? true : false);
     AsyncStorage.getItem("userInfo").then((values) => {
       let data = JSON.parse(values);
-      setUserInfo(data);
+      setUserForm(data);
       setFirstName(data.firstname);
       setLastName(data.lastname);
       setPhone(data.phone);
       setCountry(data.country);
       setCity(data.city);
-      console.log(userInfo);
+      console.log(userForm);
 
       // AxiosInstance.get(
       //   "profile/",
@@ -43,9 +44,9 @@ const ProfileScreen = ({ navigation }) => {
       //   }
       // )
       //   .then((res) => {
-      //     setUserInfo(res.data);
-      //     AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
-      //     // setUserInfo(userInfo);
+      //     setUserForm(res.data);
+      //     AsyncStorage.setItem("userForm", JSON.stringify(res.data));
+      //     // setUserForm(userForm);
       //   })
       //   .catch((e) => {
       //     console.log(e);
@@ -53,8 +54,7 @@ const ProfileScreen = ({ navigation }) => {
     });
   }, [token]);
 
-  const { profile, logout, token } = React.useContext(AuthContext);
-  console.log(userInfo);
+  // console.log(userForm);
   return (
     <View style={styles.container}>
       <View style={{ margin: 20 }}>
@@ -167,8 +167,8 @@ const ProfileScreen = ({ navigation }) => {
         </View>
         <TouchableOpacity
           style={styles.commandButton}
-          onPress={() => {
-            profile(firstName, lastName, phone, country, city);
+          onPress={async () => {
+            await profile(firstName, lastName, phone, country, city);
           }}
         >
           <Text style={styles.panelButtonTitle}>Submit</Text>

@@ -1,3 +1,4 @@
+import { style } from "@mui/system";
 import * as React from "react";
 import {
   View,
@@ -9,7 +10,9 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Picker,
 } from "react-native";
+// import DropDownPicker from "react-native-dropdown-picker";
 
 import AxiosInstance from "../../AxiosInstance";
 
@@ -18,6 +21,10 @@ import AxiosInstance from "../../AxiosInstance";
 const FoodScreen = ({ navigation }) => {
   const [foods, setFoods] = React.useState([]);
   const [allfoods, setAllFoods] = React.useState([]);
+  const [weight, setweight] = React.useState("");
+
+  // setWeight = weight;
+
   React.useEffect(() => {
     AxiosInstance.get("food/list/")
       .then((res) => {
@@ -55,26 +62,45 @@ const FoodScreen = ({ navigation }) => {
   );
   const headerComponent = () => {
     return (
-      <View style={styles.topNav}>
-        <TouchableOpacity
-          style={styles.commandButton}
-          onPress={() => {
-            // profile(firstName, lastName, phone, country, city);
-            getRecommendedFoods(-1);
-          }}
-        >
-          <Text style={styles.listHeadLine}>Lose Weight</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.commandButton}
-          onPress={() => {
-            // profile(firstName, lastName, phone, country, city);
-            getRecommendedFoods(1);
-          }}
-        >
-          <Text style={styles.listHeadLine}>Gain Weight</Text>
-        </TouchableOpacity>
-      </View>
+      <SafeAreaView>
+        <View>
+          <View style={styles.topNav}>
+            <TouchableOpacity
+              // style={styles.dropDownStyle}
+              style={styles.commandButton}
+              onPress={() => {
+                // profile(firstName, lastName, phone, country, city);
+                getRecommendedFoods(-1);
+              }}
+            >
+              <Text>Lose Weight</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.commandButton}
+              // style={}
+              onPress={() => {
+                // profile(firstName, lastName, phone, country, city);
+                getRecommendedFoods(1);
+              }}
+            >
+              <Text>Gain Weight</Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.listHeadLine}>Foods</Text>
+        </View>
+      </SafeAreaView>
+
+      // <View>
+      //   <Picker>
+      //     <Picker.Item
+      //       label="Please Select for Losing or Gaining Weight"
+      //       value="disabled"
+      //       color="#aaa"
+      //     />
+      //     <Picker.Item label="Lose Weight" value="Lose Weight" />
+      //     <Picker.Item label="Gain Weight" value="Gain Weight" />
+      //   </Picker>
+      // </View>
     );
   };
   const itemSeperator = () => {
@@ -89,6 +115,8 @@ const FoodScreen = ({ navigation }) => {
           ListHeaderComponentStyle={styles.listHeader}
           ListHeaderComponent={headerComponent}
           data={foods}
+          // key={foods.id}
+          keyExtractor={(item) => item.id}
           renderItem={oneFood}
           ItemSeparatorComponent={itemSeperator}
           ListEmptyComponent={<Text>This is an empty list.</Text>}
@@ -167,20 +195,47 @@ const styles = StyleSheet.create({
     paddingHorizontal: 100,
     paddingVertical: 6,
     borderRadius: 4,
-    backgroundColor: "oldlace",
-    alignSelf: "flex-start",
+    // backgroundColor: "rgba(0,0,0,0.2)",
+    // alignSelf: "flex-start",
     marginHorizontal: "1%",
     marginBottom: 6,
     minWidth: "48%",
     textAlign: "center",
     margin: 12,
   },
-  // listHeadline1: {
-  //   flexDirection: "row",
-  //   // backgroundColor: "oldlace",
-  // },
-  // listHeadLine: {
-  //   flexDirection: "row",
-  //   // backgroundColor: "oldlace",
-  // },
+  dropDownStyle: {
+    backgroundColor: "rgba(0,0,0,0.2)",
+    padding: 8,
+    borderRadius: 6,
+    minHeight: 42,
+    justifyContent: "center",
+  },
+  label: {
+    textAlign: "center",
+    marginBottom: 10,
+    fontSize: 24,
+  },
+  buttonLabel: {
+    fontSize: 12,
+    fontWeight: "500",
+    color: "coral",
+  },
+  selected: {
+    backgroundColor: "coral",
+    borderWidth: 0,
+  },
+  selectedLabel: {
+    color: "white",
+  },
+  button: {
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderRadius: 4,
+    backgroundColor: "oldlace",
+    alignSelf: "flex-start",
+    marginHorizontal: "1%",
+    marginBottom: 6,
+    minWidth: "48%",
+    textAlign: "center",
+  },
 });

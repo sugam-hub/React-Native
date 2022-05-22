@@ -90,27 +90,20 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         alert(`Profile Submitted`);
         AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
+        setUserInfo(res.data);
+        console.log("fromProfile");
       })
       .catch((e) => {
         let error = Object.values(e.response.data)[0][0];
         alert(`Register Error ${error}`);
       });
   };
-  // const fetchFoods = () => {
-  //   AxiosInstance.get("food/list/")
-  //     .then((res) => {
-  //       setFood(res.data);
-  //     })
-  //     .catch((e) => {
-  //       let error = Object.values(e.response.data)[0][0];
-  //       alert(`Error Fetching Foods`);
-  //     });
-  //   return food;
-  // };
   const bmi = (bmi) => {
     AxiosInstance.put("profile/", { bmi })
       .then((res) => {
         console.log(res.data);
+        setUserInfo(res.data);
+
         AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
       })
       .catch((e) => {
@@ -119,14 +112,16 @@ export const AuthProvider = ({ children }) => {
       });
   };
   const calories = (calories) => {
-    AxiosInstance.put("profile/", { calories })
+    AxiosInstance.put("profile/", { calories: calories })
       .then((res) => {
         console.log(res.data);
+        setUserInfo(res.data);
+
         AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
       })
       .catch((e) => {
         let error = Object.values(e.response.data)[0][0];
-        console.log(`BMI Error ${error}`);
+        console.log(`Calories Error ${error}`);
       });
   };
   const logout = () => {
@@ -138,20 +133,16 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     )
-      .then((res) => {
-        AsyncStorage.removeItem("token");
-        setToken(null);
-        setIsLoading(false);
-        setIsAuthenticated(false);
-      })
+      .then((res) => {})
       .catch((e) => {
         alert(`Logout Error ${e}`);
-        AsyncStorage.removeItem("token");
-        setToken(null);
-        setIsLoading(false);
-        setIsAuthenticated(false);
       })
       .finally(() => {});
+    AsyncStorage.removeItem("token");
+    AsyncStorage.removeItem("userInfo");
+    setToken(null);
+    setIsLoading(false);
+    setIsAuthenticated(false);
   };
 
   const globalContext = {

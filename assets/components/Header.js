@@ -8,33 +8,33 @@ import Badge from "../components/Badge";
 
 // const Headers = (_) => (
 const Headers = () => {
-  const [userInfo, setUserInfo] = React.useState({});
-  const { token } = React.useContext(AuthContext);
+  // const [userInfo, setUserInfo] = React.useState({});
+  const { token, userInfo } = React.useContext(AuthContext);
 
-  React.useEffect(() => {
-    // setIsAuthenticated(token !== null ? true : false);
-    AsyncStorage.getItem("userInfo").then((values) => {
-      setUserInfo(JSON.parse(values));
-      // setUserInfo(values.firstname);
-      console.log(userInfo);
+  // React.useEffect(() => {
+  //   // setIsAuthenticated(token !== null ? true : false);
+  //   AsyncStorage.getItem("userInfo").then((values) => {
+  //     setUserInfo(JSON.parse(values));
+  //     // setUserInfo(values.firstname);
+  //     console.log(userInfo);
 
-      AxiosInstance.get(
-        "profile/",
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-        .then((res) => {
-          setUserInfo(res.data);
-          AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
-          // setUserInfo(userInfo);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  }, [token]);
+  //     AxiosInstance.get(
+  //       "profile/",
+  //       {},
+  //       {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       }
+  //     )
+  //       .then((res) => {
+  //         setUserInfo(res.data);
+  //         AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
+  //         // setUserInfo(userInfo);
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   });
+  // }, [token]);
   // <React.Fragment>
   return (
     <View style={styles.icons}>

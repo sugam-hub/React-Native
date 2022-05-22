@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { AuthContext } from "../../components/context";
 
 // const CalculatorScreen = ({ navigation }) => {
 class CalculatorScreen extends Component {
@@ -162,6 +163,10 @@ class CalculatorScreen extends Component {
   };
 
   render() {
+    let { calories } = this.context;
+    const setCalories = () => {
+      calories(this.state.calResult);
+    };
     return (
       <SafeAreaView style={styles.safe}>
         <View>
@@ -229,7 +234,10 @@ class CalculatorScreen extends Component {
 
         <TouchableOpacity
           style={styles.commandButton}
-          onPress={() => this.calculate(this.state.age, this.state.gender)}
+          onPress={() => {
+            this.calculate(this.state.age, this.state.gender);
+            setCalories();
+          }}
         >
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
@@ -250,6 +258,8 @@ class CalculatorScreen extends Component {
     );
   }
 }
+
+CalculatorScreen.contextType = AuthContext;
 
 export default CalculatorScreen;
 
