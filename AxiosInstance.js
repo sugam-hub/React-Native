@@ -1,4 +1,20 @@
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+// AsyncStorage.getItem("token");
+// let token = "";
+// let getToken = async () => {
+//   try {
+//     token = await AsyncStorage.getItem("token");
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+// // getToken();
+
+// AsyncStorage.getItem("token").then((response) => {
+//   token = response;
+// });
+// console.log(token);
 
 // export const host = "http://localhost:8000";
 export const host = "http://127.0.0.1:8000";
@@ -10,7 +26,7 @@ const AxiosInstance = axios.create({
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
-    // Autorization: "application/json",
+    // Autorization: `Token ${token}`,
     accept: "application/json",
   },
 });

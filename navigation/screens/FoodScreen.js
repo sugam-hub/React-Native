@@ -12,18 +12,13 @@ import {
   TouchableOpacity,
   Picker,
 } from "react-native";
-// import DropDownPicker from "react-native-dropdown-picker";
 
 import AxiosInstance from "../../AxiosInstance";
-
-// import foods from "./Foods";
 
 const FoodScreen = ({ navigation }) => {
   const [foods, setFoods] = React.useState([]);
   const [allfoods, setAllFoods] = React.useState([]);
   const [weight, setweight] = React.useState("");
-
-  // setWeight = weight;
 
   React.useEffect(() => {
     AxiosInstance.get("food/list/")
@@ -69,7 +64,6 @@ const FoodScreen = ({ navigation }) => {
               // style={styles.dropDownStyle}
               style={styles.commandButton}
               onPress={() => {
-                // profile(firstName, lastName, phone, country, city);
                 getRecommendedFoods(-1);
               }}
             >
@@ -79,7 +73,6 @@ const FoodScreen = ({ navigation }) => {
               style={styles.commandButton}
               // style={}
               onPress={() => {
-                // profile(firstName, lastName, phone, country, city);
                 getRecommendedFoods(1);
               }}
             >
@@ -89,18 +82,6 @@ const FoodScreen = ({ navigation }) => {
           <Text style={styles.listHeadLine}>Foods</Text>
         </View>
       </SafeAreaView>
-
-      // <View>
-      //   <Picker>
-      //     <Picker.Item
-      //       label="Please Select for Losing or Gaining Weight"
-      //       value="disabled"
-      //       color="#aaa"
-      //     />
-      //     <Picker.Item label="Lose Weight" value="Lose Weight" />
-      //     <Picker.Item label="Gain Weight" value="Gain Weight" />
-      //   </Picker>
-      // </View>
     );
   };
   const itemSeperator = () => {

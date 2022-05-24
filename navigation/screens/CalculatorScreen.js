@@ -199,13 +199,6 @@ class CalculatorScreen extends Component {
             placeholder="Your age here"
             keyboardType="numeric"
           />
-          {/* <TextInput
-            style={styles.input}
-            onChangeText={this.handleWeight}
-            value={text}
-            placeholder="Your weight here"
-            keyboardType="numeric"
-          /> */}
         </View>
         <Text
           style={{
@@ -217,16 +210,10 @@ class CalculatorScreen extends Component {
         >
           Gender
         </Text>
-        {/* <View>
-          <RadioButton.Group onValueChange={this.handleGender}>
-            <RadioButton.Item label="Male" value="male" />
-            <RadioButton.Item label="Female" value="female" />
-          </RadioButton.Group>
-        </View> */}
+
         <TextInput
           style={styles.input}
           onChangeText={this.handleGender}
-          // value={text}
           placeholder="Your gender here i.e(male or female)"
         />
 
@@ -234,8 +221,8 @@ class CalculatorScreen extends Component {
 
         <TouchableOpacity
           style={styles.commandButton}
-          onPress={() => {
-            this.calculate(this.state.age, this.state.gender);
+          onPress={async () => {
+            await this.calculate(this.state.age, this.state.gender);
             setCalories();
           }}
         >

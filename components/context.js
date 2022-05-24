@@ -52,13 +52,10 @@ export const AuthProvider = ({ children }) => {
         setToken(res.data.key);
 
         AsyncStorage.setItem("token", res.data.key);
-        AxiosInstance.get(
-          "profile/",
-          {},
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
+
+        AxiosInstance.get("profile/", {
+          headers: { Authorization: `Token ${res.data.key}` },
+        })
           .then((res) => {
             setUserInfo(res.data);
             AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
@@ -86,7 +83,9 @@ export const AuthProvider = ({ children }) => {
       country: country,
       city: city,
     };
-    AxiosInstance.put("profile/", Data)
+    AxiosInstance.put("profile/", Data, {
+      headers: { Authorization: `Token ${token}` },
+    })
       .then((res) => {
         alert(`Profile Submitted`);
         AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
@@ -99,7 +98,13 @@ export const AuthProvider = ({ children }) => {
       });
   };
   const bmi = (bmi) => {
-    AxiosInstance.put("profile/", { bmi })
+    AxiosInstance.put(
+      "profile/",
+      { bmi },
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    )
       .then((res) => {
         console.log(res.data);
         setUserInfo(res.data);
@@ -112,7 +117,13 @@ export const AuthProvider = ({ children }) => {
       });
   };
   const calories = (calories) => {
-    AxiosInstance.put("profile/", { calories: calories })
+    AxiosInstance.put(
+      "profile/",
+      { calories: calories },
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    )
       .then((res) => {
         console.log(res.data);
         setUserInfo(res.data);
@@ -126,13 +137,7 @@ export const AuthProvider = ({ children }) => {
   };
   const logout = () => {
     setIsLoading(true);
-    AxiosInstance.post(
-      "auth/logout/",
-      {},
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    AxiosInstance.post("auth/logout/", {})
       .then((res) => {})
       .catch((e) => {
         alert(`Logout Error ${e}`);

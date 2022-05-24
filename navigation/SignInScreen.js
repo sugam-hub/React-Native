@@ -81,7 +81,7 @@ const SignInScreen = ({ navigation }) => {
             style={styles.commandButton}
             onPress={() => {
               login(username, password);
-              // navigation.navigate("Splash");
+              // navigation.navigate("profile");
             }}
           >
             <Text

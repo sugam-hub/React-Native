@@ -35,22 +35,6 @@ const ProfileScreen = ({ navigation }) => {
       setCountry(data.country);
       setCity(data.city);
       console.log(userForm);
-
-      // AxiosInstance.get(
-      //   "profile/",
-      //   {},
-      //   {
-      //     headers: { Authorization: `Bearer ${token}` },
-      //   }
-      // )
-      //   .then((res) => {
-      //     setUserForm(res.data);
-      //     AsyncStorage.setItem("userForm", JSON.stringify(res.data));
-      //     // setUserForm(userForm);
-      //   })
-      //   .catch((e) => {
-      //     console.log(e);
-      //   });
     });
   }, [token]);
 
@@ -77,22 +61,7 @@ const ProfileScreen = ({ navigation }) => {
                 source={require("../../assets/images/profile.png")}
                 style={{ height: 100, width: 100 }}
                 imageStyle={{ borderRadius: 15 }}
-              >
-                {/* <View>
-                  <Icon
-                    name="camera"
-                    size={35}
-                    color="#000"
-                    style={{
-                      opacity: 0.7,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      border: "none",
-                      borderRadius: 10,
-                    }}
-                  />
-                </View> */}
-              </ImageBackground>
+              ></ImageBackground>
             </View>
           </TouchableOpacity>
           <Text
@@ -103,7 +72,9 @@ const ProfileScreen = ({ navigation }) => {
               fontWeight: "bold",
             }}
           >
-            {userInfo.firstname} {userInfo.lastname}
+            {userInfo.firstname
+              ? `${userInfo.firstname} ${userInfo.lastname}`
+              : "Complete your profile"}
           </Text>
         </View>
         <View style={styles.action}>
@@ -168,6 +139,7 @@ const ProfileScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.commandButton}
           onPress={async () => {
+            // navigation.navigate("MainContainer");
             await profile(firstName, lastName, phone, country, city);
           }}
         >

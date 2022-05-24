@@ -7,6 +7,7 @@ import SplashScreen from "./SplashScreen";
 import SignInScreen from "./SignInScreen";
 import SignUpScreen from "./SignUpScreen";
 import MainContainer from "./MainContainer";
+import ProfileScreen from "./screens/ProfileScreen";
 
 import { AuthContext } from "../components/context";
 

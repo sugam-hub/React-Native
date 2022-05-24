@@ -17,8 +17,6 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { AuthContext } from "../components/context";
 import Spinner from "react-native-loading-spinner-overlay/lib";
-// import { auth } from "../firebase";
-// import axios from "axios";
 
 const SignUpScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
@@ -30,35 +28,6 @@ const SignUpScreen = ({ navigation }) => {
     confirm_secureTextEntry: true,
   });
 
-  // const textInputChange = (val) => {
-  //   if (val.length !== 0) {
-  //     setData({
-  //       ...data,
-  //       email: val,
-  //       check_textInputChange: true,
-  //     });
-  //   } else {
-  //     setData({
-  //       ...data,
-  //       email: val,
-  //       check_textInputChange: false,
-  //     });
-  //   }
-  // };
-
-  // const handlePasswordChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     password: val,
-  //   });
-  // };
-
-  // const handleConfirmPasswordChange = (val) => {
-  //   setData({
-  //     ...data,
-  //     confirm_password: val,
-  //   });
-  // };
   const updateSecureTextEntry = () => {
     setData({
       ...data,
@@ -72,28 +41,6 @@ const SignUpScreen = ({ navigation }) => {
       confirm_secureTextEntry: !data.confirm_secureTextEntry,
     });
   };
-  // console.log(data.email);
-
-  // const handleSignUp = () => {
-  //   auth
-  //     .createUserWithEmailAndPassword(email.data, password.data)
-  //     .then((userCredentials) => {
-  //       const user = userCredentials.user;
-  //       console.log(user.email.data);
-  //     })
-  //     .catch((error) => alert(error.message));
-  // };
-
-  // var InsertRecord = () => {
-  //   var Email = data.email;
-  //   var Password = data.password;
-
-  //   if (Email.length == 0 || Password == 0) {
-  //     alert("Required field is missing");
-  //   } else {
-  //     var InsertAPIURL = "http://10.0.2.2:80/api/insert.php/";
-  //   }
-  // };
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
