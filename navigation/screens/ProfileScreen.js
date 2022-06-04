@@ -34,7 +34,7 @@ const ProfileScreen = ({ navigation }) => {
       setPhone(data.phone);
       setCountry(data.country);
       setCity(data.city);
-      console.log(userForm);
+      // console.log(userForm);
     });
   }, [token]);
 

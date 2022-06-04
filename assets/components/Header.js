@@ -13,10 +13,13 @@ const Headers = () => {
   return (
     <View style={styles.icons}>
       <View>
-
-        <Text>Hello, {userInfo && userInfo.firstname}</Text>
-        <Text>Your BMI: {userInfo && userInfo.bmi}</Text>
-        <Text>Calories to intake: {userInfo && userInfo.calories}</Text>
+        <Text style={styles.header}>
+          Hello, {userInfo && userInfo.firstname}
+        </Text>
+        <Text style={styles.header}>Your BMI: {userInfo && userInfo.bmi}</Text>
+        <Text style={styles.header}>
+          Calories to intake: {userInfo && userInfo.calories}
+        </Text>
       </View>
     </View>
   );
@@ -30,6 +33,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 15,
+    borderWidth: "2px",
+    borderRadius: "10px",
+    padding: "5px",
+    margin: "5px",
   },
   rightBtns: {
     flexDirection: "row",
@@ -46,6 +53,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginVertical: 20,
     paddingHorizontal: 15,
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: "w200",
   },
 });
 

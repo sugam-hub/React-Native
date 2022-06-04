@@ -5,7 +5,7 @@ import ListItem from "../components/ListItem";
 
 const Challenges = ({ data }) => (
   <View>
-    <Text style={styles.listTitle}>Meals For Today</Text>
+    <Text style={styles.listTitle}>Recommended Meals</Text>
     <FlatList
       horizontal={true}
       showsHorizontalScrollIndicator={false}

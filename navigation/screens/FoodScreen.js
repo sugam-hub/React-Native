@@ -60,24 +60,25 @@ const FoodScreen = ({ navigation }) => {
       <SafeAreaView>
         <View>
           <View style={styles.topNav}>
-            <TouchableOpacity
-              // style={styles.dropDownStyle}
-              style={styles.commandButton}
-              onPress={() => {
-                getRecommendedFoods(-1);
-              }}
-            >
-              <Text>Lose Weight</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.commandButton}
-              // style={}
-              onPress={() => {
-                getRecommendedFoods(1);
-              }}
-            >
-              <Text>Gain Weight</Text>
-            </TouchableOpacity>
+            <View style={styles.btn}>
+              <TouchableOpacity
+                onPress={() => {
+                  getRecommendedFoods(-1);
+                }}
+              >
+                <Text style={styles.btnText}>Lose Weight</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.btn}>
+              <TouchableOpacity
+                onPress={() => {
+                  getRecommendedFoods(1);
+                }}
+              >
+                <Text style={styles.btnText}>Gain Weight</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           <Text style={styles.listHeadLine}>Foods</Text>
         </View>
@@ -93,7 +94,7 @@ const FoodScreen = ({ navigation }) => {
         <StatusBar backgroundColor="#009387" barStyle="light-content" />
 
         <FlatList
-          ListHeaderComponentStyle={styles.listHeader}
+          ListHeaderComponentStyle={styles.heading}
           ListHeaderComponent={headerComponent}
           data={foods}
           // key={foods.id}
@@ -115,14 +116,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  heading: {
+    color: "#333",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
   listHeadLine: {
     // paddingTop: 30,
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: "left",
+    alignItems: "left",
     color: "#333",
     fontSize: 22,
     fontWeight: "bold",
+    margin: "10px",
+    marginBottom: "10px",
   },
   separator: {
     height: 1,
@@ -169,21 +177,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 13,
   },
-  topNav: {
-    fontWeight: "900",
-    flexDirection: "row",
-    alignContent: "flex-start",
-    paddingHorizontal: 100,
-    paddingVertical: 6,
-    borderRadius: 4,
-    // backgroundColor: "rgba(0,0,0,0.2)",
-    // alignSelf: "flex-start",
-    marginHorizontal: "1%",
-    marginBottom: 6,
-    minWidth: "48%",
-    textAlign: "center",
-    margin: 12,
-  },
   dropDownStyle: {
     backgroundColor: "rgba(0,0,0,0.2)",
     padding: 8,
@@ -218,5 +211,22 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     minWidth: "48%",
     textAlign: "center",
+  },
+  topNav: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  btn: {
+    padding: "10px",
+    margin: "2px",
+    border: "none",
+    borderRadius: "7px",
+    backgroundColor: "#009387",
+    flexGrow: "1",
+    alignItems: "center",
+  },
+  btnText: {
+    fontSize: "20px",
+    color: "white",
   },
 });

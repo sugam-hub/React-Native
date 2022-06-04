@@ -10,21 +10,35 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import exercise from "./Exercise";
+// import exercise from "./Exercise";
+import AxiosInstance from "../../AxiosInstance";
 
 const ExerciseScreen = ({ navigation }) => {
-  // const description = () => {
-  //   oneExercise();
-  // };
+  const [exercises, setExercises] = React.useState([]);
+  const [allExercises, setAllExercises] = React.useState([]);
 
+  React.useEffect(() => {
+    AxiosInstance.get("exercise/list/")
+      .then((res) => {
+        setAllExercises(res.data);
+        setExercises(res.data);
+      })
+      .catch((e) => {
+        let error = Object.values(e.response.data)[0][0];
+        alert("Error Fetching Exercises");
+      });
+  }, []);
+  const getRecommendedExercises = (bmiAffectionRate) => {
+    let filteredExercises = allExercises.filter((exercise) => {
+      return exercise.bmi_affection_rate == bmiAffectionRate;
+    });
+    console.log(filteredExercises);
+    setExercises(filteredExercises);
+  };
   const oneExercise = ({ item }) => (
     <View style={styles.item}>
-      <TouchableOpacity
-        onPress={() => {
-          // description();
-        }}
-      >
-        <Image source={item.image} style={styles.img} />
+      <TouchableOpacity onPress={() => {}}>
+        <Image source={item.photo} style={styles.img} />
       </TouchableOpacity>
 
       <View>
@@ -37,58 +51,50 @@ const ExerciseScreen = ({ navigation }) => {
     </View>
   );
   const headerComponent = () => {
-    return <Text style={styles.heading}>Weight Loss</Text>;
+    // return <Text style={styles.heading}>Weight Loss</Text>;
+    return (
+      <SafeAreaView>
+        <View>
+          <View style={styles.topNav}>
+            <View style={styles.btn}>
+              <TouchableOpacity
+                onPress={() => {
+                  getRecommendedExercises(-1);
+                }}
+              >
+                <Text style={styles.btnText}>Lose Weight</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.btn}>
+              <TouchableOpacity
+                onPress={() => {
+                  getRecommendedExercises(1);
+                }}
+              >
+                <Text style={styles.btnText}>Gain Weight</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <Text style={styles.listHeadLine}>Exercises</Text>
+        </View>
+      </SafeAreaView>
+    );
   };
+
   const itemSeperator = () => {
-    return <View style={styles.separator} />;
-  };
-
-  const oneExercise1 = ({ item }) => (
-    <View style={styles.item}>
-      <TouchableOpacity
-        onPress={() => {
-          // description();
-        }}
-      >
-        <Image source={item.image} style={styles.img} />
-      </TouchableOpacity>
-
-      <View>
-        <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.name}>{item.name}</Text>
-          <Text style={styles.name1}>{item.time}</Text>
-          <Text style={styles.name1}>{item.kcal}</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-  const headerComponent1 = () => {
-    return <Text style={styles.heading}>Weight Gain</Text>;
-  };
-  const itemSeperator1 = () => {
     return <View style={styles.separator} />;
   };
   return (
     <ScrollView>
       <SafeAreaView>
         <StatusBar backgroundColor="#009387" barStyle="light-content" />
-        <View style={styles.listHeader}>
-          <Text style={styles.listHeadLine}>Exercise</Text>
-        </View>
         <FlatList
           ListHeaderComponentStyle={styles.heading}
           ListHeaderComponent={headerComponent}
-          data={exercise}
+          data={exercises}
+          keyExtractor={(item) => item.id}
           renderItem={oneExercise}
           ItemSeparatorComponent={itemSeperator}
-          ListEmptyComponent={<Text>This is an empty list.</Text>}
-        />
-        <FlatList
-          ListHeaderComponentStyle={styles.heading}
-          ListHeaderComponent={headerComponent1}
-          data={exercise}
-          renderItem={oneExercise1}
-          ItemSeparatorComponent={itemSeperator1}
           ListEmptyComponent={<Text>This is an empty list.</Text>}
         />
       </SafeAreaView>
@@ -152,5 +158,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 13,
     opacity: 0.5,
+  },
+  topNav: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  btn: {
+    padding: "10px",
+    margin: "2px",
+    border: "none",
+    borderRadius: "7px",
+    backgroundColor: "#009387",
+    flexGrow: "1",
+    alignItems: "center",
+  },
+  btnText: {
+    fontSize: "20px",
+    color: "white",
   },
 });

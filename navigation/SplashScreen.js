@@ -19,7 +19,7 @@ const SplashScreen = ({ navigation }) => {
         <Animateable.Image
           animation="bounceIn"
           duraton="1500"
-          source={require("../assets/images/profile.png")}
+          // source={require("../assets/images/swasta.png")}
         />
       </View>
       <Animateable.View animation="fadeInUpBig" style={styles.footer}>

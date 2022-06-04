@@ -126,7 +126,7 @@ class Inputs extends Component {
     );
   }
 }
-// };
+
 Inputs.contextType = AuthContext;
 export default Inputs;
 

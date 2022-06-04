@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log(error);
+        alert("Invalid Username and Password");
       });
   };
 

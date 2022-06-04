@@ -63,6 +63,7 @@ const SignUpScreen = ({ navigation }) => {
         <ScrollView>
           <Text style={[styles.text_footer, { marginTop: 5 }]}>Username</Text>
           <View style={styles.action}>
+            <FontAwesome name="user-o" color="05375a" size={20} />
             <TextInput
               placeholder="Username"
               style={styles.textInput}
