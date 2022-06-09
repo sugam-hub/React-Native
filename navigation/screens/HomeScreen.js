@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 
 import Headers from "../../assets/components/Header";
 import Challenges from "../../assets/components/Challenges";
@@ -9,36 +9,46 @@ const data = [
   {
     key: 1,
     name: "Water",
-    time: "10",
+    time: "1",
     kcal: "0",
-    quantity: "3 ltrs",
+    quantity: "1ltrs",
     image: require("../../assets/images/water.jpg"),
   },
   {
     key: 2,
-    name: "Apple",
-    time: "10",
-    kcal: "95",
-    quantity: "3",
-    image: require("../../assets/images/apple.jpg"),
+    name: "Rice",
+    time: "1",
+    kcal: "272",
+    quantity: "80g",
+    image: require("../../assets/images/rice.jpg"),
   },
   {
     key: 3,
-    name: "Banana",
-    time: "10",
-    kcal: "105",
-    quantity: "3",
-    image: require("../../assets/images/banana.jpg"),
+    name: "Chicken Curry",
+    time: "1",
+    kcal: "110",
+    quantity: "100g",
+    image: require("../../assets/images/chickencurry.jpg"),
+  },
+  {
+    key: 4,
+    name: "Green Vegitables",
+    time: "1",
+    kcal: "23",
+    quantity: "100g",
+    image: require("../../assets/images/green.jpg"),
   },
 ];
 
 const HomeScreen = () => {
   return (
-    <View style={styles.screen}>
+    // <ScrollView>
+    <SafeAreaView style={styles.screen}>
       <Headers />
       <Challenges data={data} />
       <Workouts />
-    </View>
+    </SafeAreaView>
+    // </ScrollView>
   );
 };
 

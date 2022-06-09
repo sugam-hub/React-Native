@@ -28,7 +28,7 @@ const Navigation = ({ navigation }) => {
         ) : (
           <>
             <Stack.Screen
-              name="Splash"
+              name="Swasta"
               component={SplashScreen}
               navigation={navigation}
             />
@@ -36,11 +36,13 @@ const Navigation = ({ navigation }) => {
               name="SignIn"
               component={SignInScreen}
               navigation={navigation}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="SignUp"
               component={SignUpScreen}
               navigation={navigation}
+              options={{ headerShown: false }}
             />
           </>
         )}

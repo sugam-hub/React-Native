@@ -1,10 +1,10 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, SafeAreaView, StyleSheet } from "react-native";
 
 const Badge = (props) => (
-  <View style={styles.badge}>
+  <SafeAreaView style={styles.badge}>
     <Text style={styles.text}>{props.name}</Text>
-  </View>
+  </SafeAreaView>
 );
 
 const styles = StyleSheet.create({

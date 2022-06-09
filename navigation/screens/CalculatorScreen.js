@@ -175,7 +175,7 @@ class CalculatorScreen extends Component {
               padding: 20,
               fontSize: 30,
               fontWeight: "bold",
-              fontFamily: "sans-serif",
+              // fontFamily: "sans-serif",
             }}
           >
             Calories Calculator
@@ -187,7 +187,7 @@ class CalculatorScreen extends Component {
               padding: 20,
               fontSize: 20,
               fontWeight: "bold",
-              fontFamily: "sans-serif",
+              // fontFamily: "sans-serif",
             }}
           >
             Age
@@ -205,7 +205,7 @@ class CalculatorScreen extends Component {
             padding: 20,
             fontSize: 20,
             fontWeight: "bold",
-            fontFamily: "sans-serif",
+            // fontFamily: "sans-serif",
           }}
         >
           Gender
@@ -235,7 +235,7 @@ class CalculatorScreen extends Component {
             padding: 20,
             fontSize: 20,
             fontWeight: "bold",
-            fontFamily: "sans-serif",
+            // fontFamily: "sans-serif",
           }}
         >
           Calories to intake per day:

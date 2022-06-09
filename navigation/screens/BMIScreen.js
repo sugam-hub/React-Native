@@ -58,7 +58,7 @@ class Inputs extends Component {
               padding: 20,
               fontSize: 30,
               fontWeight: "bold",
-              fontFamily: "sans-serif",
+              // fontFamily: "sans-serif",
             }}
           >
             BMI Calculator
@@ -70,7 +70,7 @@ class Inputs extends Component {
                 padding: 20,
                 fontSize: 20,
                 fontWeight: "bold",
-                fontFamily: "sans-serif",
+                // fontFamily: "sans-serif",
               }}
             >
               Height
@@ -89,7 +89,7 @@ class Inputs extends Component {
             padding: 20,
             fontSize: 20,
             fontWeight: "bold",
-            fontFamily: "sans-serif",
+            // fontFamily: "sans-serif",
           }}
         >
           Weight
@@ -115,7 +115,7 @@ class Inputs extends Component {
             padding: 20,
             fontSize: 20,
             fontWeight: "bold",
-            fontFamily: "sans-serif",
+            // fontFamily: "sans-serif",
           }}
         >
           Your body mass index(BMI):
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     padding: 20,
     fontSize: 30,
     fontWeight: "bold",
-    fontFamily: "sans-serif",
+    // fontFamily: "sans-serif",
     textAlign: "center",
   },
   resultText: {

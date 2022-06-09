@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   React.useEffect(() => {
     setIsAuthenticated(token !== null ? true : false);
+
     AsyncStorage.getItem("userInfo").then((values) => {
       setUserInfo(JSON.parse(values));
     });
@@ -91,6 +92,7 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.setItem("userInfo", JSON.stringify(res.data));
         setUserInfo(res.data);
         console.log("fromProfile");
+        alert("Profile Submitted");
       })
       .catch((e) => {
         let error = Object.values(e.response.data)[0][0];

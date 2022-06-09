@@ -19,8 +19,9 @@ const SplashScreen = ({ navigation }) => {
         <Animateable.Image
           animation="bounceIn"
           duraton="1500"
-          // source={require("../assets/images/swasta.png")}
+          // source={require("../assets/images/app.png")}
         />
+        <Text style={styles.logo1}>SWASTA</Text>
       </View>
       <Animateable.View animation="fadeInUpBig" style={styles.footer}>
         <View>
@@ -105,5 +106,11 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     flexDirection: "row",
     backgroundColor: "#009387",
+  },
+  logo1: {
+    fontSize: 64,
+    fontWeight: "bold",
+    color: "white",
+    // fontFamily: "lucida grande, tahoma, verdana, arial, sans-serif",
   },
 });

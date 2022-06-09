@@ -1,40 +1,39 @@
 import React from "react";
-import { Text, StyleSheet, View, FlatList } from "react-native";
+import { Text, StyleSheet, View, FlatList, SafeAreaView } from "react-native";
 import WorkOutItem from "../components/WorkOutItem";
 import AxiosInstance from "../../AxiosInstance";
 import { AuthContext } from "../../components/context";
 
 // const data = [
 //   {
-//     key: 1,
-//     name: "Walking",
-//     kcal: "167kcal",
+//     id: 1,
+//     name: "Jogging",
+//     kcal: "372 kcal",
 //     time: "30 min",
-//     image: require("../../assets/images/walking.gif"),
+//     image: require("../images/jogging.gif"),
 //   },
 //   {
-//     key: 2,
-//     name: "Jogging or Running",
-//     kcal: "372kcal",
-//     time: "30 min",
-//     image: require("../../assets/images/jogging.gif"),
-//   },
-//   {
-//     key: 3,
+//     id: 2,
 //     name: "Cycling",
-//     kcal: "298kcal",
+//     kcal: "298 kcal",
 //     time: "30 min",
-//     image: require("../../assets/images/cycling.gif"),
+//     image: require("../images/cycling.gif"),
 //   },
 //   {
-//     key: 4,
-//     name: "Weight training",
-//     kcal: "112kcal",
+//     id: 3,
+//     name: "Jumping Rope",
+//     kcal: "200-300 kcal",
 //     time: "30 min",
-//     image: require("../../assets/images/weightTraining.gif"),
+//     image: require("../images/jumpingrope.gif"),
+//   },
+//   {
+//     id: 4,
+//     name: "Yoga",
+//     kcal: "149 kcal",
+//     time: "30 min",
+//     image: require("../images/yoga.gif"),
 //   },
 // ];
-
 const Workouts = () => {
   const [exercises, setExercises] = React.useState([]);
   const { userInfo } = React.useContext(AuthContext);
@@ -59,14 +58,8 @@ const Workouts = () => {
     }
   }, [userInfo]);
 
-  // React.useEffect(() => {
-  //   console.log(exercises);
-  // }, []);
-  // {
-  //   userInfo && getRecommendedExercises(1);
-  // }
   return (
-    <View style={styles.workouts}>
+    <SafeAreaView style={styles.workouts}>
       <View style={styles.workoutHeader}>
         <Text style={styles.recentWorkout}>Recommended Exercises</Text>
         <View style={styles.workoutsRight}></View>
@@ -90,7 +83,7 @@ const Workouts = () => {
           />
         )}
       </React.Fragment>
-    </View>
+    </SafeAreaView>
   );
 };
 

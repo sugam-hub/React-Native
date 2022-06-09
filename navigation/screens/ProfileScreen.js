@@ -45,7 +45,7 @@ const ProfileScreen = ({ navigation }) => {
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
             onPress={() => {
-              bs.current.snapTo(0);
+              // bs.current.snapTo(0);
             }}
           >
             <View

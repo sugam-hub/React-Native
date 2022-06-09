@@ -17,7 +17,7 @@ import axios from "axios";
 // console.log(token);
 
 // export const host = "http://localhost:8000";
-export const host = "http://127.0.0.1:8000";
+export const host = "https://sugam19.pythonanywhere.com";
 const baseURL = host + "/api/v1/";
 const AxiosInstance = axios.create({
   baseURL: baseURL,

@@ -1,27 +1,32 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import AxiosInstance from "../../AxiosInstance";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../../components/context";
 
 import Badge from "../components/Badge";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Headers = () => {
   // const [userInfo, setUserInfo] = React.useState({});
   const { token, userInfo } = React.useContext(AuthContext);
 
   return (
-    <View style={styles.icons}>
-      <View>
-        <Text style={styles.header}>
-          Hello, {userInfo && userInfo.firstname}
-        </Text>
-        <Text style={styles.header}>Your BMI: {userInfo && userInfo.bmi}</Text>
-        <Text style={styles.header}>
-          Calories to intake: {userInfo && userInfo.calories}
-        </Text>
+    <SafeAreaView>
+      <View style={styles.icons}>
+        <View>
+          <Text style={styles.header}>
+            Hello, {userInfo && userInfo.firstname}
+          </Text>
+          <Text style={styles.header}>
+            Your BMI: {userInfo && userInfo.bmi}
+          </Text>
+          <Text style={styles.header}>
+            Calories to intake: {userInfo && userInfo.calories}
+          </Text>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 // );
@@ -33,10 +38,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 15,
-    borderWidth: "2px",
-    borderRadius: "10px",
-    padding: "5px",
-    margin: "5px",
+    borderWidth: 2,
+    borderRadius: 10,
+    padding: 5,
+    margin: 10,
+    marginTop: 30,
   },
   rightBtns: {
     flexDirection: "row",
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 20,
-    fontWeight: "w200",
+    fontWeight: "600",
   },
 });
 

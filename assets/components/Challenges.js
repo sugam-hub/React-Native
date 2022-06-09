@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import { Text, SafeAreaView, StyleSheet, FlatList } from "react-native";
 
 import ListItem from "../components/ListItem";
 
 const Challenges = ({ data }) => (
-  <View>
+  <SafeAreaView>
     <Text style={styles.listTitle}>Recommended Meals</Text>
     <FlatList
       horizontal={true}
@@ -24,7 +24,7 @@ const Challenges = ({ data }) => (
         );
       }}
     />
-  </View>
+  </SafeAreaView>
 );
 
 const styles = StyleSheet.create({

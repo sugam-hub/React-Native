@@ -1,10 +1,13 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, SafeAreaView } from "react-native";
 
 const WorkOutItem = (props) => (
-  <View style={styles.item}>
+  <SafeAreaView style={styles.item}>
     <View style={styles.imageContainer}>
-      <Image style={{ width: "100%", height: "100%" }} source={props.image} />
+      <Image
+        style={{ width: "100%", height: "100%" }}
+        source={{ uri: props.image }}
+      />
     </View>
     <View style={styles.times}>
       <Text style={{ textAlign: "center", fontWeight: "bold" }}>
@@ -16,7 +19,7 @@ const WorkOutItem = (props) => (
       <Text style={styles.time}>{props.time}</Text>
       <Text style={styles.time}>{props.kcal}</Text>
     </View>
-  </View>
+  </SafeAreaView>
 );
 
 const styles = StyleSheet.create({

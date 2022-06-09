@@ -1,4 +1,3 @@
-import { style } from "@mui/system";
 import * as React from "react";
 import {
   View,
@@ -43,13 +42,14 @@ const FoodScreen = ({ navigation }) => {
     // {foods.map((item) => (
     <View style={styles.item}>
       <TouchableOpacity onPress={() => {}}>
-        <Image source={item.photo} style={styles.img} />
+        <Image source={{ uri: item.photo }} style={styles.img} />
       </TouchableOpacity>
 
       <View>
         <TouchableOpacity onPress={() => {}}>
           <Text style={styles.name}>{item.name}</Text>
           <Text style={styles.name1}>{item.kcal}</Text>
+          {/* <Text style={styles.name1}>{item.time}</Text> */}
         </TouchableOpacity>
       </View>
     </View>
@@ -124,13 +124,13 @@ const styles = StyleSheet.create({
   listHeadLine: {
     // paddingTop: 30,
     flexDirection: "row",
-    justifyContent: "left",
-    alignItems: "left",
+    // justifyContent: "left",
+    // alignItems: "left",
     color: "#333",
     fontSize: 22,
     fontWeight: "bold",
-    margin: "10px",
-    marginBottom: "10px",
+    margin: 10,
+    marginBottom: 10,
   },
   separator: {
     height: 1,
@@ -217,16 +217,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   btn: {
-    padding: "10px",
-    margin: "2px",
+    padding: 10,
+    margin: 2,
     border: "none",
-    borderRadius: "7px",
+    borderRadius: 7,
     backgroundColor: "#009387",
-    flexGrow: "1",
+    flexGrow: 1,
     alignItems: "center",
   },
   btnText: {
-    fontSize: "20px",
+    fontSize: 20,
     color: "white",
   },
 });

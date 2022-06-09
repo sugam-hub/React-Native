@@ -38,7 +38,7 @@ const ExerciseScreen = ({ navigation }) => {
   const oneExercise = ({ item }) => (
     <View style={styles.item}>
       <TouchableOpacity onPress={() => {}}>
-        <Image source={item.photo} style={styles.img} />
+        <Image source={{ uri: item.photo }} style={styles.img} />
       </TouchableOpacity>
 
       <View>
@@ -164,16 +164,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   btn: {
-    padding: "10px",
-    margin: "2px",
+    padding: 10,
+    margin: 2,
     border: "none",
-    borderRadius: "7px",
+    borderRadius: 7,
     backgroundColor: "#009387",
-    flexGrow: "1",
+    flexGrow: 1,
     alignItems: "center",
   },
   btnText: {
-    fontSize: "20px",
+    fontSize: 20,
     color: "white",
   },
 });

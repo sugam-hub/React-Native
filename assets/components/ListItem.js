@@ -1,5 +1,12 @@
 import React from "react";
-import { ImageBackground, Text, View, StyleSheet, Image } from "react-native";
+import {
+  ImageBackground,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+} from "react-native";
 
 const InfoData = (props) => (
   <View style={{ ...props.style, paddingHorizontal: 10 }}>
@@ -9,7 +16,7 @@ const InfoData = (props) => (
 );
 
 const ListItem = (props) => (
-  <View style={styles.item}>
+  <SafeAreaView style={styles.item}>
     <ImageBackground
       resizeMode="cover"
       style={styles.image}
@@ -40,7 +47,7 @@ const ListItem = (props) => (
         </View>
       </View>
     </ImageBackground>
-  </View>
+  </SafeAreaView>
 );
 
 const styles = StyleSheet.create({
